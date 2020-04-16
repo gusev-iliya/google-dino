@@ -2,17 +2,19 @@ import pygame
 import random
 pygame.init()
 win = pygame.display.set_mode((1000, 500))
-
+#загрузка картинок
 anim=[pygame.image.load('дино1.png'),pygame.image.load('дино2.png'),pygame.image.load('дино3.png')]
 pl=pygame.image.load('дино1.png')
 pol=pygame.image.load('пол.png')
 trees=[pygame.image.load('дерево1.png'),pygame.image.load('дерево2.png'),pygame.image.load('дерево3.png')]
+#класс для динозаврика
 class Dino:
     def __init__(self,x,y,width,height):
         self.x=x
         self.y=y
         self.width=width
         self.height=height
+#класс для пола
 class floor:
     def __init__(self,x,y,speed):
         self.x=x
@@ -20,6 +22,7 @@ class floor:
         self.speed=speed
     def draw(self,win):
         win.blit(pol,(self.x,self.y))
+#класс для дерева
 class tree:
     def __init__(self,x,y,speed):
         self.x=x
@@ -36,6 +39,7 @@ isRun=True
 anx=1
 c=0
 dino=Dino(10,280,150,150)
+#основной цикл
 while run:
     pygame.time.delay(10)
     for event in pygame.event.get():
@@ -51,7 +55,7 @@ while run:
     # else:
     #     isRun=True
 
-
+    #деревья и пол
     floors[0].x-=floors[0].speed
     floors[1].x-=floors[1].speed
     if floors[0].x<=-1000:
@@ -71,7 +75,7 @@ while run:
     for b in treesg:
         b.draw(win)
 
-
+    #прыжок
     if key[pygame.K_SPACE]and dino.y>=425 :
         isRun=False
     if isRun ==False and  c<10:
@@ -82,7 +86,7 @@ while run:
         c=0
         isRun=True
 
-
+    #анимашка
     if isRun==True:
         if anx ==4:
             win.blit(anim[2],(dino.x,dino.y))
